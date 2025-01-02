@@ -1,0 +1,40 @@
+# conda env create -f environment_NS.yaml
+# conda env update --file environment_NS.yaml --prune
+# conda env list
+# conda env remove --name nonstat_region
+# conda activate nonstat_region
+# conda deactivate
+
+name: nonstat_region
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - dask[complete]
+  - jupyterlab
+  - netcdf4
+  - matplotlib
+  - numba
+  - numpy
+  - rpy2
+  - r-base
+  - r-quantreg
+  - pandas
+  - scipy
+  - xarray
+  - geopy
+  - geopandas
+  - cartopy
+  - metpy
+  - plotly
+  - rasterio
+  - statsmodels
+  - lmoments3
+  - zarr
+  - pyarrow
+  - tqdm
+  - fiona
+  - joblib
+  - pydantic
+  - ruff

@@ -1,0 +1,148 @@
+# config.yaml
+region: 'V12'  # Area (volume) to consider: 'V11' for TX, 'V12' for MT_ID_WY, 'conus' for CONUS
+dir_data0: 'prepared_data_conus'  # Directory with common input data
+prepared_data_region: ## Added
+    V11: 'prepared_data_V11'
+    V12: 'prepared_data_V12'
+    V13: 'prepared_data_V13'
+    CONUS: 'prepared_data_conus'
+prism_file: 'PRISM_ppt_30yr_normal_800mM4_annual.nc4' ###### Added
+meta_file: 'df_ams_meta.csv' #### Added
+dist2coast_file: 'dist2coast_1deg_regrid.nc' # Added
+fit_kappa: False  # Fit Kappa distribution (K4) instead of GEV
+solve_at_station: True  # Solve at each station instead of using a grid
+remove_center_station: False  # Remove center station data (usually False)
+ams_year_range: [-1950, -2024]
+# Reuse and computation options
+use_saved_24h_weights: True  # Reuse available 24h weights
+recompute_weights: True  # Force recomputation of weights when percentiles change
+arithmetic_mean_weights: True  # Use arithmetic mean instead of geometric mean
+use_saved_weights: True  # Reuse available subdaily and daily weights
+ams_duration: '24h'  # Duration data to input
+min_radius: 70  # Minimum search area radius in km
+max_radius: 160  # Maximum search area radius in km
+# Difference thresholds
+min_diff_mam: 40  # Minimum percentage difference of MAM
+max_diff_mam: 75  # Maximum percentage difference of MAM
+min_diff_map: 70  # Minimum percentage difference of MAP
+max_diff_map: 105  # Maximum percentage difference of MAP
+min_diff_elev: 700  # Minimum difference of ground elevation in meters
+max_diff_elev: 1200  # Maximum difference of ground elevation in meters
+min_elev_range: 1200  # Minimum elevation range in meters
+max_elev_range: 1700  # Maximum elevation range in meters
+min_obstacle_height: 600  # Minimum obstacle height in meters
+max_obstacle_height: 1100  # Maximum obstacle height in meters
+min_log10p2st: 0.69897  # Minimum limit from maximum confidence limit p (log10(1/0.2))
+max_log10p2st: 1.30103  # Maximum limit from minimum confidence limit p (log10(1/0.05))
+min_diff_dist2coast: 1  # Minimum relative difference of distance to the coast
+max_diff_dist2coast: 3  # Maximum relative difference of distance to the coast
+use_weights_minmax_perc: False  # Use percentiles to determine weight limits
+wmin_perc: 80  # Percentile for minimum limit in modified triweight kernel function
+wmax_perc: 95  # Percentile for maximum limit in modified triweight kernel function
+perc0: [75, 80, 85, 90, 95, 97, 99]
+apply_cap2limits: True  # Apply caps to percentile-based limits
+min0_diff_mam: 20  # Always allowed difference of MAM in %
+min0_diff_map: 20  # Always allowed percentage difference of MAP in %
+min0_diff_elev: 250  # Always allowed difference of ground elevation in meters
+min0_elev_range: 300  # Always allowed elevation range in meters
+min0_obstacle_height: 150  # Always allowed obstacle height in meters
+max0_p2st: 0.20  # Always allowed maximum confidence limit p
+min0_p2st: 0.05  # Minimum allowed confidence limit p
+min0_diff_dist2coast: 1  # Always allowed relative difference of distance to the coast
+max0_diff_dist2coast: 3  # Minimum allowed relative difference of distance to the coast
+compute_obstacle_height: True  # Compute obstacle height between neighbor and center point
+obstacle_height_step: 6  # Factor for DEM grid cell size (approx. 150 m)
+compute_2sample_tests: True  # Compute 2-sample statistical tests
+ams_nmin_2sample_tests: 10  # Minimum AMS count for 2-sample tests
+use_hourly_diff_map_weights: False  # Use dMAP-related weight for hourly durations
+use_dist2coast: False  # Use distance to coast in computations
+dist2coast0: 20  # Distance to the coastline in km for weight formula
+# Spatial Model to use
+# 0: Distribution parameters are uniform
+# 1: loc proportional to MAM and scl to loc
+# 2: loc and scl proportional to MAM
+# 21: starting from model 2 and correct for sqrt(MAP)
+# 22: starting from model 2 and correct for sqrt(MAP) as independent terms
+# 3: loc and scl proportional to MAP
+# 4: loc and scl with linear dependency with cov1, as in the assessment report
+nmodel: 2  # Spatial model to use
+relax_bounds: True  # Relax bounds for fitted parameters
+bounds_percentile: 1  # Percentile for bounds (1 or 0.5)
+ncov2_option: -1  # Temporal covariate option (-1 means not using cov2)
+smooth_gwl: True  # Smooth GWL data
+ncov2term_option: 1  # Covariate term option (0: additive, 1: multiplicative)
+ncov1_option: 0  # Spatial covariate option (0: MAP)
+n_map_option: 0  # MAP option for spatial covariate (0: normalized MAP)
+use_station_mam: True  # Use station MAM for regional fitting
+use_greg_mam: False  # Use Greg's MAM grid instead of Prism MAM
+ams_nmin_station_mam: 5  # Minimum AMS count to use station MAM
+ams_nmax_station_mam: 10  # AMS count above which station MAM is used
+errors_in_inches: True  # Report errors in inches
+return_period_out: [2, 2.54, 5, 10, 25, 50, 100, 1000]  # Return periods in years
+out_xobs: False  # Use observed points for estimated precipitation
+output_a14_precip: True  # Output precipitation estimates from A14 Vol12 study
+save_plots: False  # Save plots (protect in case of parallel execution)
+ci_perc: 0.9  # Confidence interval percentile
+ci_niter: 1000  # Number of iterations for CI estimation
+ci_okrho: False  # Use average correlation coefficient rho
+ci_std_factor: 2.0  # Factor controlling noise amplitude in parameters
+min_ci_std_factor: 0.2  # Minimum allowed std ratio between region and volume 12
+max_ci_std_factor: 1.0  # Maximum allowed std ratio between region and volume 12
+ci_r_vs_d_nmin_station: 20  # Minimum stations for r vs d dependency computation
+ci_r_vs_d_weight_min: 0.5  # Minimum neighbor weight for r vs d dependency
+ci_rmin: 1.05  # Minimum ratio allowed for p95/p50 and p50/p05
+pp_fdur0: 1.1  # Minimum increase factor for consecutive base durations
+pp_fdur1: 1.02  # Minimum increase factor for consecutive new durations
+##################################
+region_specific:
+    V12:
+      sdurl: ['60m', '06h', '24h', '04d', '10d', '60d']
+      diff_map0: [62.2, 71.2, 81.0, 92.3, 105.7, 112.8, 124.7]
+      diff_elev0: [614, 718, 838, 972, 1174, 1288, 1512]
+      elev_range0: [1218, 1297, 1390, 1502, 1682, 1782, 2018]
+      obstacle_height0: [570, 659, 767, 902, 1079, 1195, 1431]
+      diff_mam0: [[18.1, 20.6, 23.9, 28.2, 33.8, 37.3, 43.7],
+              [23.1, 26.3, 30.6, 37.6, 46.0, 51.6, 59.5],
+              [30.9, 35.6, 41.3, 48.5, 59.0, 65.3, 77.6],
+              [40.1, 45.9, 53.0, 62.0, 73.8, 81.3, 94.8],
+              [44.7, 51.4, 59.1, 68.8, 81.4, 88.7, 103.1],
+              [54.3, 62.3, 71.6, 82.3, 96.1, 104.1, 117.9]]
+      p2st0: [[0.20714, 0.16428, 0.11485, 0.07490, 0.03282, 0.01659, 0.00452],
+              [0.23416, 0.18310, 0.13088, 0.07786, 0.02861, 0.01420, 0.00293],
+              [0.19562, 0.14902, 0.10251, 0.05857, 0.02109, 0.00946, 0.00112],
+              [0.21379, 0.16400, 0.11439, 0.06574, 0.02154, 0.00819, 0.00074],
+              [0.20674, 0.15247, 0.09930, 0.05149, 0.01330, 0.00426, 0.00030],
+              [0.15419, 0.10549, 0.06170, 0.02750, 0.00577, 0.00146, 0.00005]]
+
+    V11:
+      sdurl: ['60m', '06h', '24h', '10d']
+      diff_map0: [10.4, 11.7, 13.1, 15.2, 18.6, 20.8, 26.6]
+      diff_elev0: [98, 115, 137, 168, 217, 251, 356]
+      elev_range0: [164, 183, 207, 235, 281, 322, 451]
+      obstacle_height0: [46, 55, 67, 84, 117, 145, 201]
+      diff_mam0: [[6.7, 7.5, 8.6, 10.1, 12.4, 13.9, 17.6],
+              [7.4, 8.3, 9.6, 11.3, 14.0, 15.5, 19.6],
+              [8.0, 9.0, 10.3, 11.9, 14.7, 16.6, 21.4],
+              [8.0, 9.1, 10.4, 12.3, 15.3, 17.3, 22.0]]
+      p2st0: [[0.22356, 0.17156, 0.12023, 0.07400, 0.02906, 0.01576, 0.00378],
+              [0.24657, 0.19562, 0.14773, 0.09518, 0.04000, 0.02190, 0.00639],
+              [0.28150, 0.22709, 0.16893, 0.10874, 0.05219, 0.03040, 0.00907],
+              [0.32995, 0.27367, 0.21247, 0.15035, 0.08121, 0.05086, 0.01665]]
+prepared_data_prefix: "prepared_data"
+pre_industrial_co2: 280.0
+current_co2: 420.0
+pre_industrial_gwl: 0
+current_gwl: 1.1  ### Global Warming Level in oC
+base_year: 1960
+current_year: 2024
+map_extents:
+  V11: [-108.0, -92.0, 25.0, 37.5]
+  V12: [-118.5, -103.0, 40.0, 50.0]
+  V12_MT: [-116.3, -103.8, 44.1, 49.2]
+  V13: [-86.0, -73.0, 31.0, 44.0]
+  CONUS: [-126.0, -66.0, 24.0, 51.0]
+########################################
+weights_log_file: "pfe_v13_weights.log"  # the log file path
+fit_log_file: "pfe_v13_fit.log"  # the log file path
+log_level: "INFO"  # configure the log level
+output_base_path: '/PFprojects/atlas14/vol13/pfev13/test2/'
